@@ -1,7 +1,16 @@
-export default function HomePage() {
+import Navigation from "@/components/Navigation";
+import SpotLight from "@/components/SpotLight";
+
+export default function HomePage({ allArtPieces }) {
+  const getRandomPiece = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+  const randomPiece = getRandomPiece(allArtPieces);
+
   return (
-    <div>
-      <h1>Hello from Next.js</h1>
-    </div>
+    <>
+      <SpotLight randomPiece={randomPiece} />
+      <Navigation />
+    </>
   );
 }
