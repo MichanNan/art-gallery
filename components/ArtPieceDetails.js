@@ -1,24 +1,28 @@
-import { useRouter } from "next/router";
 import FavoriteButton from "./FavoriteButton";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 export default function ArtPieceDetails({
   detailArtPiece,
   onToggleFavorite,
-  isFavorite,
+  detailedArtPieceInfo,
+  onSubmitComment,
 }) {
   const router = useRouter();
   const handleGoBack = () => {
     router.push("/art-pieces");
   };
+
   return (
     <>
       <p onClick={handleGoBack}>{`< Back`} </p>
       <div>
         <FavoriteButton
           onToggleFavorite={onToggleFavorite}
-          isFavorite={isFavorite}
+          isFavorite={detailedArtPieceInfo?.isFavorite}
         />
         <Image
           src={detailArtPiece.imageSource}
@@ -29,6 +33,11 @@ export default function ArtPieceDetails({
         <p>{`${detailArtPiece.name} by ${detailArtPiece.artist}`}</p>
         <p>{`${detailArtPiece.year}(${detailArtPiece.genre})`}</p>
       </div>
+      <Comments comments={detailedArtPieceInfo?.comments} />
+      <CommentForm
+        onSubmitComment={onSubmitComment}
+        slug={detailArtPiece.slug}
+      />
     </>
   );
 }

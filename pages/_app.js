@@ -6,7 +6,7 @@ const URL = "https://example-apis.vercel.app/api/art";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export default function App({ Component, pageProps }) {
   const [artPiecesInfo, setArtPiecesInfo] = useState([]);
-
+  console.log(artPiecesInfo);
   // get all pieces from the api using useSWR
   const { data: allArtPieces } = useSWR(
     "https://example-apis.vercel.app/api/art",
@@ -35,6 +35,39 @@ export default function App({ Component, pageProps }) {
     }
   };
 
+  //add comment
+  const handleSubmitComment = (event, slug) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    const newComment = data.comment;
+
+    const artPiece = artPiecesInfo.find(
+      (artPieceInfo) => artPieceInfo.slug === slug
+    );
+    // update the targeted artPiece comment if there is already a artPiece
+    if (artPiece) {
+      const comments = artPiece.comments;
+      const newArtPieceInfo = {
+        ...artPiece,
+        comments: [...comments, newComment],
+      };
+      //update the artPiecesInfo
+      const updatedArtPieces = artPiecesInfo.map((artPieceInfo) => {
+        if (artPieceInfo.slug === slug) {
+          return newArtPieceInfo;
+        } else return artPieceInfo;
+      });
+      setArtPiecesInfo(updatedArtPieces);
+    } else {
+      setArtPiecesInfo([
+        ...artPiecesInfo,
+        { slug, comments: [newComment], isFavorite: false },
+      ]);
+    }
+    event.target.reset();
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -43,6 +76,7 @@ export default function App({ Component, pageProps }) {
         allArtPieces={allArtPieces}
         artPiecesInfo={artPiecesInfo}
         onToggleFavorite={handleToggleFavorite}
+        onSubmitComment={handleSubmitComment}
       />
     </>
   );
