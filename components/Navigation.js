@@ -6,7 +6,7 @@ export default function Navigation() {
       <div>
         <Link href={"/"}>Spotlight</Link>
         <Link href={"/art-pieces"}>ArtPieces</Link>
-        <Link href={"/favorite"}>Favorite</Link>
+        <Link href={"/favorites"}>Favorite</Link>
       </div>
     </>
   );

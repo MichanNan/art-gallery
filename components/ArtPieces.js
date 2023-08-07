@@ -1,13 +1,21 @@
 import ArtPiecePreview from "./ArtPiecePreview";
 
-export default function ArtPieces({ allArtPieces }) {
+export default function ArtPieces({
+  artPieces,
+  artPiecesInfo,
+  onToggleFavorite,
+}) {
   return (
     <>
       <ul>
-        {allArtPieces.map((piece) => {
+        {artPieces.map((piece) => {
           return (
             <li key={piece.slug}>
-              <ArtPiecePreview {...piece} />
+              <ArtPiecePreview
+                {...piece}
+                artPiecesInfo={artPiecesInfo}
+                onToggleFavorite={onToggleFavorite}
+              />
             </li>
           );
         })}
