@@ -4,6 +4,8 @@ import SpotLight from "@/components/SpotLight";
 import { useState, useContext } from "react";
 import { ArtPiecesContext } from "@/store/artPieces-context";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 export default function HomePage() {
   const artPiecesCtx = useContext(ArtPiecesContext);
 
@@ -22,7 +24,7 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <div className="d-flex justify-content-center vh-100 mt-4">
       <SpotLight
         randomPiece={randomPiece}
         onGetRandomPiece={handleGetRandomArtPiece}
@@ -30,6 +32,6 @@ export default function HomePage() {
         onToggleFavorite={artPiecesCtx.onToggleFavorite}
       />
       <Navigation />
-    </>
+    </div>
   );
 }

@@ -16,18 +16,18 @@ export default function ArtPiecePreview({
   })?.isFavorite;
   return (
     <div>
-      <FavoriteButton
-        onToggleFavorite={() => onToggleFavorite(slug)}
-        isFavorite={isFavorite}
-      />
       <Link href={`/art-pieces/${slug}`}>
         <Image
           src={imageSource}
           alt={name}
-          width={dimensions.width * 0.1}
-          height={dimensions.height * 0.1}
+          width={dimensions.width * 0.2}
+          height={dimensions.height * 0.2}
         />
       </Link>
+      <FavoriteButton
+        onToggleFavorite={() => onToggleFavorite(slug)}
+        isFavorite={isFavorite}
+      />
       <p>{`${name} by ${artist}`}</p>
     </div>
   );

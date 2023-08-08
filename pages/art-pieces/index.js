@@ -7,13 +7,13 @@ import { useContext } from "react";
 export default function ArtPiecesPage() {
   const ArtPiecesCtx = useContext(ArtPiecesContext);
   return (
-    <>
+    <div className="">
       <ArtPieces
         artPieces={ArtPiecesCtx.allArtPieces}
         artPiecesInfo={ArtPiecesCtx.artPiecesInfo}
         onToggleFavorite={ArtPiecesCtx.onToggleFavorite}
       />
       <Navigation />
-    </>
+    </div>
   );
 }

@@ -4,6 +4,7 @@ import CommentForm from "./CommentForm";
 
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { Button } from "react-bootstrap";
 
 export default function ArtPieceDetails({
   detailArtPiece,
@@ -17,8 +18,14 @@ export default function ArtPieceDetails({
   };
 
   return (
-    <>
-      <p onClick={handleGoBack}>{`< Back`} </p>
+    <div className="container mt-2 mb-2 text-center d-flex flex-column align-items-center justify-content-center">
+      <div className="row align-items-start">
+        <Button className="col-lg-12 offset-lg-3 " onClick={handleGoBack}>
+          {"< Back"}
+        </Button>
+      </div>
+      <p className="">{`${detailArtPiece.name} by ${detailArtPiece.artist}`}</p>
+
       <div>
         <FavoriteButton
           onToggleFavorite={() => onToggleFavorite(detailArtPiece.slug)}
@@ -30,10 +37,10 @@ export default function ArtPieceDetails({
           width={detailArtPiece.dimensions.width * 0.3}
           height={detailArtPiece.dimensions.height * 0.3}
         />
-        <p>{`${detailArtPiece.name} by ${detailArtPiece.artist}`}</p>
+
         <p>{`${detailArtPiece.year}(${detailArtPiece.genre})`}</p>
       </div>
-      <ul>
+      <ul className="d-flex">
         {detailArtPiece.colors.map((color) => (
           <li key={color}>
             <div
@@ -52,6 +59,6 @@ export default function ArtPieceDetails({
         onSubmitComment={onSubmitComment}
         slug={detailArtPiece.slug}
       />
-    </>
+    </div>
   );
 }

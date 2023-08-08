@@ -5,11 +5,12 @@ export default createGlobalStyle`
   *::before,
   *::after {
     box-sizing: border-box;
-    list-style:none
+    list-style:none;
+    padding:0;
+    margin:0
   }
 
   body {
-    margin: 0;
     font-family: system-ui;
   }
 `;

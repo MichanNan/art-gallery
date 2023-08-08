@@ -2,6 +2,9 @@ import FavoriteButton from "./FavoriteButton";
 
 import Image from "next/image";
 
+import { Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 export default function ({
   randomPiece,
   onGetRandomPiece,
@@ -25,13 +28,15 @@ export default function ({
           height={randomPiece.dimensions.height * 0.2}
         />
         <p>{`${randomPiece.name} by ${randomPiece.artist}`}</p>
-        <button
-          onClick={(event) => {
-            onGetRandomPiece(event);
-          }}
-        >
-          Get Random Art Piece
-        </button>
+        <div className="d-flex justify-content-center">
+          <Button
+            onClick={(event) => {
+              onGetRandomPiece(event);
+            }}
+          >
+            Get Random Art Piece
+          </Button>
+        </div>
       </div>
     </>
   );

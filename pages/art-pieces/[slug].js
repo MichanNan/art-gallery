@@ -3,7 +3,9 @@ import { ArtPiecesContext } from "@/store/artPieces-context";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 
-export default function ArtPieceDetailPage({ onSubmitComment }) {
+import "bootstrap/dist/css/bootstrap.min.css";
+
+export default function ArtPieceDetailPage() {
   const ArtPiecesCtx = useContext(ArtPiecesContext);
   const router = useRouter();
   const { slug } = router.query;
