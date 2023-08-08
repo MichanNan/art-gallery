@@ -1,17 +1,18 @@
 import ArtPieces from "@/components/ArtPieces";
 import Navigation from "@/components/Navigation";
 
-export default function FavoritesPage({
-  allArtPieces,
-  artPiecesInfo,
-  onToggleFavorite,
-}) {
+import { ArtPiecesContext } from "@/store/artPieces-context";
+import { useContext } from "react";
+
+export default function FavoritesPage() {
+  const ArtPiecesCtx = useContext(ArtPiecesContext);
+
   // filter all the art pieces that the property isFavorite is true
-  const favoritePiecesInfo = artPiecesInfo.filter((artPiece) => {
+  const favoritePiecesInfo = ArtPiecesCtx.artPiecesInfo.filter((artPiece) => {
     return artPiece.isFavorite === true;
   });
 
-  const favoritePieces = allArtPieces.filter((artPiece) =>
+  const favoritePieces = ArtPiecesCtx.allArtPieces.filter((artPiece) =>
     favoritePiecesInfo.find(
       (artPieceInfo) => artPieceInfo.slug === artPiece.slug
     )
@@ -21,8 +22,8 @@ export default function FavoritesPage({
     <>
       <ArtPieces
         artPieces={favoritePieces}
-        artPiecesInfo={artPiecesInfo}
-        onToggleFavorite={onToggleFavorite}
+        artPiecesInfo={ArtPiecesCtx.artPiecesInfo}
+        onToggleFavorite={ArtPiecesCtx.onToggleFavorite}
       />
       <Navigation />
     </>

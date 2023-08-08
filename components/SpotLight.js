@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export default function ({
   randomPiece,
-  onToggleFavorite,
-  artPiecesInfo,
   onGetRandomPiece,
+  artPiecesInfo,
+  onToggleFavorite,
 }) {
   const isFavorite = artPiecesInfo.find(
     (pieceInfo) => pieceInfo.slug === randomPiece.slug

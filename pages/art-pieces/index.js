@@ -1,17 +1,17 @@
 import ArtPieces from "@/components/ArtPieces";
 import Navigation from "@/components/Navigation";
 
-export default function ArtPiecesPage({
-  allArtPieces,
-  artPiecesInfo,
-  onToggleFavorite,
-}) {
+import { ArtPiecesContext } from "@/store/artPieces-context";
+import { useContext } from "react";
+
+export default function ArtPiecesPage() {
+  const ArtPiecesCtx = useContext(ArtPiecesContext);
   return (
     <>
       <ArtPieces
-        artPieces={allArtPieces}
-        artPiecesInfo={artPiecesInfo}
-        onToggleFavorite={onToggleFavorite}
+        artPieces={ArtPiecesCtx.allArtPieces}
+        artPiecesInfo={ArtPiecesCtx.artPiecesInfo}
+        onToggleFavorite={ArtPiecesCtx.onToggleFavorite}
       />
       <Navigation />
     </>

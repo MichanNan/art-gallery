@@ -7,9 +7,9 @@ import Image from "next/image";
 
 export default function ArtPieceDetails({
   detailArtPiece,
-  onToggleFavorite,
   detailedArtPieceInfo,
   onSubmitComment,
+  onToggleFavorite,
 }) {
   const router = useRouter();
   const handleGoBack = () => {
@@ -21,7 +21,7 @@ export default function ArtPieceDetails({
       <p onClick={handleGoBack}>{`< Back`} </p>
       <div>
         <FavoriteButton
-          onToggleFavorite={onToggleFavorite}
+          onToggleFavorite={() => onToggleFavorite(detailArtPiece.slug)}
           isFavorite={detailedArtPieceInfo?.isFavorite}
         />
         <Image
@@ -33,6 +33,20 @@ export default function ArtPieceDetails({
         <p>{`${detailArtPiece.name} by ${detailArtPiece.artist}`}</p>
         <p>{`${detailArtPiece.year}(${detailArtPiece.genre})`}</p>
       </div>
+      <ul>
+        {detailArtPiece.colors.map((color) => (
+          <li key={color}>
+            <div
+              style={{
+                backgroundColor: `${color}`,
+                width: "2rem",
+                height: "2rem",
+                borderRadius: "50%",
+              }}
+            />
+          </li>
+        ))}
+      </ul>
       <Comments comments={detailedArtPieceInfo?.comments} />
       <CommentForm
         onSubmitComment={onSubmitComment}
