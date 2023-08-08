@@ -37,50 +37,44 @@ export default function App({ Component, pageProps }) {
   //   }
   // };
 
-  //add comment
-  const handleSubmitComment = (event, slug) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    const newComment = data.comment;
+  // //add comment
+  // const handleSubmitComment = (event, slug) => {
+  //   event.preventDefault();
+  //   const formData = new FormData(event.target);
+  //   const data = Object.fromEntries(formData);
+  //   const newComment = data.comment;
 
-    const artPiece = artPiecesInfo.find(
-      (artPieceInfo) => artPieceInfo.slug === slug
-    );
-    // update the targeted artPiece comment if there is already a artPiece
-    if (artPiece) {
-      const comments = artPiece.comments;
-      const newArtPieceInfo = {
-        ...artPiece,
-        comments: [...comments, newComment],
-      };
-      //update the artPiecesInfo
-      const updatedArtPieces = artPiecesInfo.map((artPieceInfo) => {
-        if (artPieceInfo.slug === slug) {
-          return newArtPieceInfo;
-        } else return artPieceInfo;
-      });
-      setArtPiecesInfo(updatedArtPieces);
-    } else {
-      setArtPiecesInfo([
-        ...artPiecesInfo,
-        { slug, comments: [newComment], isFavorite: false },
-      ]);
-    }
-    event.target.reset();
-  };
+  //   const artPiece = artPiecesInfo.find(
+  //     (artPieceInfo) => artPieceInfo.slug === slug
+  //   );
+  //   // update the targeted artPiece comment if there is already a artPiece
+  //   if (artPiece) {
+  //     const comments = artPiece.comments;
+  //     const newArtPieceInfo = {
+  //       ...artPiece,
+  //       comments: [...comments, newComment],
+  //     };
+  //     //update the artPiecesInfo
+  //     const updatedArtPieces = artPiecesInfo.map((artPieceInfo) => {
+  //       if (artPieceInfo.slug === slug) {
+  //         return newArtPieceInfo;
+  //       } else return artPieceInfo;
+  //     });
+  //     setArtPiecesInfo(updatedArtPieces);
+  //   } else {
+  //     setArtPiecesInfo([
+  //       ...artPiecesInfo,
+  //       { slug, comments: [newComment], isFavorite: false },
+  //     ]);
+  //   }
+  //   event.target.reset();
+  // };
 
   return (
     <SWRConfig value={{ fetcher }}>
       <ArtPiecesPorvider>
         <GlobalStyle />
-        <Component
-          {...pageProps}
-          // allArtPieces={allArtPieces}
-          // artPiecesInfo={artPiecesInfo}
-          // onToggleFavorite={handleToggleFavorite}
-          onSubmitComment={handleSubmitComment}
-        />
+        <Component {...pageProps} />
       </ArtPiecesPorvider>
     </SWRConfig>
   );

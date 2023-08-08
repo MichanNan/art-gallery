@@ -34,6 +34,7 @@ export default function ArtPiecesPorvider({ children }) {
   const artPiecesContext = {
     allArtPieces: allArtPieces,
     artPiecesInfo: artPiecesInfo,
+    setArtPiecesInfo: setArtPiecesInfo,
     onToggleFavorite: handleToggleFavorite,
   };
   return (

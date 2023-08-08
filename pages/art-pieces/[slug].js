@@ -18,12 +18,47 @@ export default function ArtPieceDetailPage({ onSubmitComment }) {
     (pieceInfo) => pieceInfo.slug === slug
   );
 
+  //add comment
+  const handleSubmitComment = (event, slug) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    const newComment = data.comment;
+
+    const artPiece = ArtPiecesCtx.artPiecesInfo.find(
+      (artPieceInfo) => artPieceInfo.slug === slug
+    );
+    // update the targeted artPiece comment if there is already a artPiece
+    if (artPiece) {
+      const comments = artPiece.comments;
+      const newArtPieceInfo = {
+        ...artPiece,
+        comments: [...comments, newComment],
+      };
+      //update the artPiecesInfo
+      const updatedArtPieces = ArtPiecesCtx.artPiecesInfo.map(
+        (artPieceInfo) => {
+          if (artPieceInfo.slug === slug) {
+            return newArtPieceInfo;
+          } else return artPieceInfo;
+        }
+      );
+      ArtPiecesCtx.setArtPiecesInfo(updatedArtPieces);
+    } else {
+      ArtPiecesCtx.setArtPiecesInfo([
+        ...ArtPiecesCtx.artPiecesInfo,
+        { slug, comments: [newComment], isFavorite: false },
+      ]);
+    }
+    event.target.reset();
+  };
+
   return (
     <>
       <ArtPieceDetails
         detailArtPiece={detailArtPiece}
         detailedArtPieceInfo={detailedArtPieceInfo}
-        onSubmitComment={onSubmitComment}
+        onSubmitComment={handleSubmitComment}
         onToggleFavorite={ArtPiecesCtx.onToggleFavorite}
       />
     </>
